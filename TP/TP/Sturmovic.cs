@@ -71,8 +71,10 @@ namespace TP
         /// <param name="star">Признак наличия звезды</param>
         /// <param name="bomb">Признак наличия бомб</param>
         /// <param name="rocket">Признак наличия ракет</param>
+       
+        public RocketCount Count { protected set; get; }
         public Sturmovic(int maxSpeed, float weight, Color mainColor, Color dopColor,
-       bool star, bool bomb, bool rocket)
+       bool star, bool bomb, bool rocket, RocketCount count)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
@@ -81,6 +83,7 @@ namespace TP
             Star = star;
             Bomb = bomb;
             Rocket = rocket;
+            Count = count;
         }
         /// <summary>
         /// Установка позиции cамолета
@@ -200,6 +203,9 @@ namespace TP
                 g.DrawRectangle(pen, _startPosX + 80, _startPosY + 80, 40, 10);
                 g.FillRectangle(spoiler, _startPosX + 80, _startPosY + 80, 40, 10);
             }
+            RocketClass rock = new RocketClass(Count,
+            MainColor, DopColor, _startPosX, _startPosY);
+            rock.DrawRocket(g);
         }
     }
 }
