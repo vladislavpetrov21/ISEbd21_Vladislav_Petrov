@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Airplane.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="FormFly.cs">
       <SubType>Form</SubType>
@@ -53,9 +54,11 @@
     <Compile Include="FormFly.Designer.cs">
       <DependentUpon>FormFly.cs</DependentUpon>
     </Compile>
+    <Compile Include="ISturmovic.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sturmovic.cs" />
+    <Compile Include="Vehicle.cs" />
     <EmbeddedResource Include="FormFly.resx">
       <DependentUpon>FormFly.cs</DependentUpon>
     </EmbeddedResource>

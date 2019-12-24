@@ -35,6 +35,7 @@
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonCreateSturm = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFly)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,15 +102,26 @@
             this.buttonCreate.Name = "buttonCreate";
             this.buttonCreate.Size = new System.Drawing.Size(69, 55);
             this.buttonCreate.TabIndex = 5;
-            this.buttonCreate.Text = "Создать";
+            this.buttonCreate.Text = "Создать самолет";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            // 
+            // buttonCreateSturm
+            // 
+            this.buttonCreateSturm.Location = new System.Drawing.Point(158, 27);
+            this.buttonCreateSturm.Name = "buttonCreateSturm";
+            this.buttonCreateSturm.Size = new System.Drawing.Size(75, 53);
+            this.buttonCreateSturm.TabIndex = 6;
+            this.buttonCreateSturm.Text = "Создать штурмовик";
+            this.buttonCreateSturm.UseVisualStyleBackColor = true;
+            this.buttonCreateSturm.Click += new System.EventHandler(this.buttonCreateSturm_Click);
             // 
             // FormFly
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 461);
+            this.Controls.Add(this.buttonCreateSturm);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonDown);
@@ -132,6 +144,7 @@
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonCreate;
+        private System.Windows.Forms.Button buttonCreateSturm;
     }
 }
 
