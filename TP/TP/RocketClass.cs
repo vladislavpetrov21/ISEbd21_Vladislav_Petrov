@@ -31,15 +31,14 @@ namespace TP
         {
             for (int i = 0; i < CountToInt(Count); i++)
             {
-                Brush kist = new SolidBrush(Color.Black);
-
+                Brush brush = new SolidBrush(Color.Black);
                 int X = i * 10;
                 int Y = i * 12;
-                g.FillRectangle(kist, globalPosX + 100 - X, globalPosY - 10 + Y, 20, 10);
-                g.FillRectangle(kist, globalPosX + 100 - X, globalPosY - 10 + Y, 40, 5);
-                g.FillRectangle(kist, globalPosX + 100 - X, globalPosY + 100 + Y, 20, 10);
-                g.FillRectangle(kist, globalPosX + 100 - X, globalPosY + 100 + Y, 40, 5);
-                kist.Dispose();
+                g.FillRectangle(brush, globalPosX + 100 - X, globalPosY - 10 + Y, 20, 10);
+                g.FillRectangle(brush, globalPosX + 100 - X, globalPosY - 10 + Y, 40, 5);
+                g.FillRectangle(brush, globalPosX + 100 - X, globalPosY + 100 + Y, 20, 10);
+                g.FillRectangle(brush, globalPosX + 100 - X, globalPosY + 100 + Y, 40, 5);
+                brush.Dispose();
             }
         }
     }
