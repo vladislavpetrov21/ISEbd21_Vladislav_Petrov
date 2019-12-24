@@ -47,7 +47,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Airplane.cs" />
+    <Compile Include="Angar.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="FormAngar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAngar.Designer.cs">
+      <DependentUpon>FormAngar.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormFly.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -59,6 +66,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sturmovic.cs" />
     <Compile Include="Vehicle.cs" />
+    <EmbeddedResource Include="FormAngar.resx">
+      <DependentUpon>FormAngar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormFly.resx">
       <DependentUpon>FormFly.cs</DependentUpon>
     </EmbeddedResource>
