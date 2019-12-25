@@ -16,7 +16,7 @@ namespace TP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormFly());
+            Application.Run(new FormAngar());
         }
     }
 }
