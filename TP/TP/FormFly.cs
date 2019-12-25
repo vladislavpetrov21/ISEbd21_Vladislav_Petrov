@@ -12,7 +12,7 @@ namespace TP
 {
     public partial class FormFly : Form
     {
-        private Sturmovic fly;
+        private ISturmovic fly;
         public FormFly()
         {
             InitializeComponent();
@@ -25,17 +25,16 @@ namespace TP
             pictureBoxFly.Image = bmp;
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Создать"
+        /// Обработка нажатия кнопки "Создать самолет"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            fly = new Sturmovic(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Yellow, true, true, true);
+            fly = new Airplane(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);
             fly.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFly.Width,
-           pictureBoxFly.Height);
+            pictureBoxFly.Height);
             Draw();
         }
         /// <summary>
@@ -62,6 +61,20 @@ namespace TP
                     fly.MoveTransport(Direction.Right);
                     break;
             }
+            Draw();
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Создать штурмовик"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCreateSturm_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            fly = new Sturmovic(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
+           Color.Yellow, true, true, true);
+            fly.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFly.Width,
+            pictureBoxFly.Height);
             Draw();
         }
     }
