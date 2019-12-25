@@ -9,15 +9,14 @@ namespace TP
 {
     public interface ISturmovic
     {
-    /// <summary>
-    /// Установка позиции самолета
-    /// </summary>
-    /// <param name="x">Координата X</param>
-    /// <param name="y">Координата Y</param>
-
-    /// <param name="width">Ширина картинки</param>
-    /// <param name="height">Высота картинки</param>
-    void SetPosition(int x, int y, int width, int height);
+        /// <summary>
+        /// Установка позиции самолета
+        /// </summary>
+        /// <param name="x">Координата X</param>
+        /// <param name="y">Координата Y</param>
+        /// <param name="width">Ширина картинки</param>
+        /// <param name="height">Высота картинки</param>
+        void SetPosition(int x, int y, int width, int height);
         /// <summary>
         /// Изменение направления пермещения
         /// </summary>
