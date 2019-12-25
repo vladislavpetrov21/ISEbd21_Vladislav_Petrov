@@ -93,7 +93,7 @@ namespace TP
             Draw();
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Добавить автомобиль"
+        /// Обработка нажатия кнопки "Добавить самолет"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
