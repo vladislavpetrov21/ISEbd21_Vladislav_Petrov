@@ -15,23 +15,34 @@ namespace TP
         /// <summary>
         /// Объект от класса-ангара
         /// </summary>
-        Angar<ISturmovic> angar;
+        MultiLevelAngar angar;
+        private const int countLevel = 5;
         public FormAngar()
         {
             InitializeComponent();
-            angar = new Angar<ISturmovic>(20, pictureBoxAngar.Width,
+            angar = new MultiLevelAngar(countLevel, pictureBoxAngar.Width,
             pictureBoxAngar.Height);
-            Draw();
+            //заполнение listBox
+            for (int i = 0; i < countLevel; i++)
+            {
+                listBoxLevels.Items.Add("Уровень " + (i + 1));
+            }
+            listBoxLevels.SelectedIndex = 0;
         }
         /// <summary>
         /// Метод отрисовки ангара
         /// </summary>
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxAngar.Width, pictureBoxAngar.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            angar.Draw(gr);
-            pictureBoxAngar.Image = bmp;
+            if (listBoxLevels.SelectedIndex > -1)
+            {//если выбран один из пуктов в listBox (при старте программы ни один пункт
+             //не будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу listBox)
+                Bitmap bmp = new Bitmap(pictureBoxAngar.Width,
+                pictureBoxAngar.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                angar[listBoxLevels.SelectedIndex].Draw(gr);
+                pictureBoxAngar.Image = bmp;
+            }
         }
         /// <summary>
         /// Обработка нажатия кнопки "Загнать самолет"
@@ -40,12 +51,20 @@ namespace TP
         /// <param name="e"></param>
         private void buttonSetFlyClick(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxLevels.SelectedIndex > -1)
             {
-                var fly = new Airplane(100, 1000, dialog.Color);
-                int place = angar + fly;
-                Draw();
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    var fly = new Airplane(100, 1000, dialog.Color);
+                    int place = angar[listBoxLevels.SelectedIndex] + fly;
+                    if (place == -1)
+                    {
+                        MessageBox.Show("Нет свободных мест", "Ошибка",
+                       MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    Draw();
+                }
             }
         }
         /// <summary>
@@ -55,16 +74,24 @@ namespace TP
         /// <param name="e"></param>
         private void buttonSetSturmovicClick(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxLevels.SelectedIndex > -1)
             {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var fly = new Sturmovic(100, 1000, dialog.Color, dialogDop.Color,
-                   true, true, true);
-                    int place = angar + fly;
-                    Draw();
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
+                    {
+                        var fly = new Sturmovic(100, 1000, dialog.Color,
+                       dialogDop.Color, true, true, true);
+                        int place = angar[listBoxLevels.SelectedIndex] + fly;
+                        if (place == -1)
+                        {
+                            MessageBox.Show("Нет свободных мест", "Ошибка",
+                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        Draw();
+                    }
                 }
             }
         }
@@ -75,27 +102,43 @@ namespace TP
         /// <param name="e"></param>
         private void buttonTakeAirplaneClick(object sender, EventArgs e)
         {
-            if (maskedTextBoxAngar.Text != "")
+            if (listBoxLevels.SelectedIndex > -1)
             {
-                var fly = angar - Convert.ToInt32(maskedTextBoxAngar.Text);
-                if (fly != null)
+                if (listBoxLevels.SelectedIndex > -1)
                 {
-                    Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                   pictureBoxTakeFly.Height);
-                    Graphics gr = Graphics.FromImage(bmp);
-                    fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
-                   pictureBoxTakeFly.Height);
-                    fly.DrawFly(gr);
-                    pictureBoxTakeFly.Image = bmp;
+                    if (maskedTextBoxAngar.Text != "")
+                    {
+                        var fly = angar[listBoxLevels.SelectedIndex] -
+                       Convert.ToInt32(maskedTextBoxAngar.Text);
+                        if (fly != null)
+                        {
+                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                           pictureBoxTakeFly.Height);
+                            Graphics gr = Graphics.FromImage(bmp);
+                            fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
+                           pictureBoxTakeFly.Height);
+                            fly.DrawFly(gr);
+                            pictureBoxTakeFly.Image = bmp;
+                        }
+                        else
+                        {
+                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                           pictureBoxTakeFly.Height);
+                            pictureBoxTakeFly.Image = bmp;
+                        }
+                        Draw();
+                    }
                 }
-                else
-                {
-                    Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                   pictureBoxTakeFly.Height);
-                    pictureBoxTakeFly.Image = bmp;
-                }
-                Draw();
             }
         }
-    }
+        /// <summary>
+        /// Метод обработки выбора элемента на listBoxLevels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
+        }
+    }    
 }

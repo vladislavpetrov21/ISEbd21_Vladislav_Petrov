@@ -16,7 +16,11 @@ namespace TP
         /// <summary>
         /// Массив объектов, которые храним
         /// </summary>
-        private T[] _places;
+        private Dictionary<int, T> _places;
+        /// <summary>
+        /// Максимальное количество мест в ангаре
+        /// </summary>
+        private int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -41,13 +45,11 @@ namespace TP
         /// <param name="pictureHeight">Размер ангара - высота</param>
         public Angar(int sizes, int pictureWidth, int pictureHeight)
         {
-            _places = new T[sizes];
+            _maxCount = sizes;
+            _places = new Dictionary<int, T>();
             PictureWidth = pictureWidth;
             PictureHeight = pictureHeight;
-            for (int i = 0; i < _places.Length; i++)
-            {
-                _places[i] = null;
-            }
+           
         }
         /// <summary>
         /// Перегрузка оператора сложения
@@ -58,11 +60,15 @@ namespace TP
         /// <returns></returns>
         public static int operator + (Angar<T> a, T fly)
         {
-            for (int i = 0; i < a._places.Length; i++)
+            if (a._places.Count == a._maxCount)
+            {
+                return -1;
+            }
+            for (int i = 0; i < a._maxCount; i++)
             {
                 if (a.CheckFreePlace(i))
                 {
-                    a._places[i] = fly;
+                    a._places.Add(i, fly);
                     a._places[i].SetPosition(5 + i / 5 * _placeSizeWidth + 5,
                      i % 5 * _placeSizeHeight + 15, a.PictureWidth,
                     a.PictureHeight);
@@ -80,14 +86,10 @@ namespace TP
         /// <returns></returns>
         public static T operator - (Angar<T> a, int index)
         {
-            if (index < 0 || index > a._places.Length)
-            {
-                return null;
-            }
-            if (!a.CheckFreePlace(index))            
+            if (!a.CheckFreePlace(index))
             {
                 T fly = a._places[index];
-                a._places[index] = null;
+                a._places.Remove(index);
                 return fly;
             }
             return null;
@@ -99,7 +101,7 @@ namespace TP
         /// <returns></returns>
         private bool CheckFreePlace(int index)
         {
-            return _places[index] == null;
+            return !_places.ContainsKey(index);
         }
         /// <summary>
         /// Метод отрисовки ангара
@@ -108,12 +110,10 @@ namespace TP
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            var keys = _places.Keys.ToList();
+            for (int i = 0; i < keys.Count; i++)
             {
-                if (!CheckFreePlace(i))
-                {//если место не пустое
-                    _places[i].DrawFly(g);
-                }
+                _places[keys[i]].DrawFly(g);
             }
         }
         /// <summary>
@@ -123,16 +123,16 @@ namespace TP
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
-            //границы ангара
-            g.DrawRectangle(pen, 0, 0, (_places.Length / 5) * _placeSizeWidth, 580);
-            for (int i = 0; i < _places.Length / 5; i++)
+            //границы праковки
+            g.DrawRectangle(pen, 0, 0, (_maxCount / 5) * _placeSizeWidth, 480);
+            for (int i = 0; i < _maxCount / 5; i++)
             {//отрисовываем, по 5 мест на линии
                 for (int j = 0; j < 6; ++j)
-                {//линия разметки места
-                    g.DrawLine(pen, i * _placeSizeWidth, j * _placeSizeHeight + 50,
-                    i * _placeSizeWidth + 150, j * _placeSizeHeight + 50);
+                {//линия рамзетки места
+                    g.DrawLine(pen, i * _placeSizeWidth, j * _placeSizeHeight,
+                    i * _placeSizeWidth + 110, j * _placeSizeHeight);
                 }
-                g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth, 500);
+                g.DrawLine(pen, i * _placeSizeWidth, 0, i * _placeSizeWidth, 400);
             }
         }
     }

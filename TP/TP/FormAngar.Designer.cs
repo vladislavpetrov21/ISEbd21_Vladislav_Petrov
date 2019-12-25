@@ -36,6 +36,7 @@
             this.labelPlace = new System.Windows.Forms.Label();
             this.buttonSetFly = new System.Windows.Forms.Button();
             this.buttonSetSturmovic = new System.Windows.Forms.Button();
+            this.listBoxLevels = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAngar)).BeginInit();
             this.groupBoxAngar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeFly)).BeginInit();
@@ -99,9 +100,9 @@
             // 
             // buttonSetFly
             // 
-            this.buttonSetFly.Location = new System.Drawing.Point(617, 11);
+            this.buttonSetFly.Location = new System.Drawing.Point(617, 95);
             this.buttonSetFly.Name = "buttonSetFly";
-            this.buttonSetFly.Size = new System.Drawing.Size(157, 55);
+            this.buttonSetFly.Size = new System.Drawing.Size(155, 31);
             this.buttonSetFly.TabIndex = 2;
             this.buttonSetFly.Text = "загнать самолет";
             this.buttonSetFly.UseVisualStyleBackColor = true;
@@ -109,19 +110,29 @@
             // 
             // buttonSetSturmovic
             // 
-            this.buttonSetSturmovic.Location = new System.Drawing.Point(618, 84);
+            this.buttonSetSturmovic.Location = new System.Drawing.Point(617, 132);
             this.buttonSetSturmovic.Name = "buttonSetSturmovic";
-            this.buttonSetSturmovic.Size = new System.Drawing.Size(155, 57);
+            this.buttonSetSturmovic.Size = new System.Drawing.Size(155, 34);
             this.buttonSetSturmovic.TabIndex = 3;
             this.buttonSetSturmovic.Text = "загнать штурмовик";
             this.buttonSetSturmovic.UseVisualStyleBackColor = true;
             this.buttonSetSturmovic.Click += new System.EventHandler(this.buttonSetSturmovicClick);
+            // 
+            // listBoxLevels
+            // 
+            this.listBoxLevels.FormattingEnabled = true;
+            this.listBoxLevels.Location = new System.Drawing.Point(618, 3);
+            this.listBoxLevels.Name = "listBoxLevels";
+            this.listBoxLevels.Size = new System.Drawing.Size(153, 82);
+            this.listBoxLevels.TabIndex = 4;
+            this.listBoxLevels.Click += new System.EventHandler(this.listBoxLevels_SelectedIndexChanged);
             // 
             // FormAngar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.buttonSetSturmovic);
             this.Controls.Add(this.buttonSetFly);
             this.Controls.Add(this.groupBoxAngar);
@@ -146,5 +157,6 @@
         private System.Windows.Forms.Label labelPlace;
         private System.Windows.Forms.Button buttonSetFly;
         private System.Windows.Forms.Button buttonSetSturmovic;
+        private System.Windows.Forms.ListBox listBoxLevels;
     }
 }
