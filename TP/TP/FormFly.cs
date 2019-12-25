@@ -32,8 +32,9 @@ namespace TP
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
+            RocketCount count = RocketCount.FIVE;
             fly = new Sturmovic(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Yellow, true, true, true);
+           Color.Yellow, true, true, true,count);
             fly.SetPosition(rnd.Next(10, 100), rnd.Next(10, 100), pictureBoxFly.Width,
            pictureBoxFly.Height);
             Draw();
