@@ -35,8 +35,7 @@ namespace TP
         private void Draw()
         {
             if (listBoxLevels.SelectedIndex > -1)
-            {//если выбран один из пуктов в listBox (при старте программы ни один пункт
-             //не будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу listBox)
+            {//если выбран один из пуктов в listBox (при старте программы ни один пункте будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу listBox)
                 Bitmap bmp = new Bitmap(pictureBoxAngar.Width,
                 pictureBoxAngar.Height);
                 Graphics gr = Graphics.FromImage(bmp);
