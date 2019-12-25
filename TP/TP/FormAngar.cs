@@ -16,6 +16,10 @@ namespace TP
         /// Объект от класса-ангара
         /// </summary>
         MultiLevelAngar angar;
+        /// <summary>
+        /// Форма для добавления
+        /// </summary>
+        FormFlyConfig form;
         private const int countLevel = 5;
         public FormAngar()
         {
@@ -41,57 +45,6 @@ namespace TP
                 Graphics gr = Graphics.FromImage(bmp);
                 angar[listBoxLevels.SelectedIndex].Draw(gr);
                 pictureBoxAngar.Image = bmp;
-            }
-        }
-        /// <summary>
-        /// Обработка нажатия кнопки "Загнать самолет"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetFlyClick(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    var fly = new Airplane(100, 1000, dialog.Color);
-                    int place = angar[listBoxLevels.SelectedIndex] + fly;
-                    if (place == -1)
-                    {
-                        MessageBox.Show("Нет свободных мест", "Ошибка",
-                       MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    Draw();
-                }
-            }
-        }
-        /// <summary>
-        /// Обработка нажатия кнопки "Загнать штурмовик"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void buttonSetSturmovicClick(object sender, EventArgs e)
-        {
-            if (listBoxLevels.SelectedIndex > -1)
-            {
-                ColorDialog dialog = new ColorDialog();
-                if (dialog.ShowDialog() == DialogResult.OK)
-                {
-                    ColorDialog dialogDop = new ColorDialog();
-                    if (dialogDop.ShowDialog() == DialogResult.OK)
-                    {
-                        var fly = new Sturmovic(100, 1000, dialog.Color,
-                       dialogDop.Color, true, true, true);
-                        int place = angar[listBoxLevels.SelectedIndex] + fly;
-                        if (place == -1)
-                        {
-                            MessageBox.Show("Нет свободных мест", "Ошибка",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        Draw();
-                    }
-                }
             }
         }
         /// <summary>
@@ -138,6 +91,32 @@ namespace TP
         private void listBoxLevels_SelectedIndexChanged(object sender, EventArgs e)
         {
             Draw();
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Добавить автомобиль"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSetFly_Click(object sender, EventArgs e)
+        {
+            form = new FormFlyConfig();
+            form.AddEvent(AddFly);
+            form.Show();
+        }
+        private void AddFly(ISturmovic fly)
+        {
+            if (fly != null && listBoxLevels.SelectedIndex > -1)
+            {
+                int place = angar[listBoxLevels.SelectedIndex] + fly;
+                if (place > -1)
+                {
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Самолет не удалось поставить");
+                }
+            }
         }
     }    
 }
