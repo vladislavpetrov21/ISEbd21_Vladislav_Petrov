@@ -43,7 +43,21 @@ namespace TP
             Star = star;
             Bomb = bomb;
             Rocket = rocket;
-        }            
+        }
+        public Sturmovic(string info) : base(info)
+        {
+            string[] strs = info.Split(';');
+            if (strs.Length == 8)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                Bomb = Convert.ToBoolean(strs[4]);
+                Star = Convert.ToBoolean(strs[5]);
+                Rocket = Convert.ToBoolean(strs[6]);
+            }
+        }
         /// <summary>
         /// Отрисовка самолета
         /// </summary>
@@ -97,6 +111,11 @@ namespace TP
         public void SetDopColor(Color color)
         {
             DopColor = color;         
+        }
+        public override string ToString()
+        {
+            return base.ToString() + ";" + DopColor.Name + ";" + Bomb + ";" +
+           Star + ";" + Rocket;
         }
     }
 }

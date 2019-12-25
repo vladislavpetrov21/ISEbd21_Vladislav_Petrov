@@ -36,17 +36,24 @@
             this.labelPlace = new System.Windows.Forms.Label();
             this.listBoxLevels = new System.Windows.Forms.ListBox();
             this.buttonAddFly = new System.Windows.Forms.Button();
+            this.menuStripAngar = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialogAngar = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialogAngar = new System.Windows.Forms.SaveFileDialog();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAngar)).BeginInit();
             this.groupBoxAngar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeFly)).BeginInit();
+            this.menuStripAngar.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxAngar
             // 
             this.pictureBoxAngar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxAngar.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxAngar.Location = new System.Drawing.Point(0, 24);
             this.pictureBoxAngar.Name = "pictureBoxAngar";
-            this.pictureBoxAngar.Size = new System.Drawing.Size(604, 450);
+            this.pictureBoxAngar.Size = new System.Drawing.Size(605, 426);
             this.pictureBoxAngar.TabIndex = 0;
             this.pictureBoxAngar.TabStop = false;
             // 
@@ -100,7 +107,7 @@
             // listBoxLevels
             // 
             this.listBoxLevels.FormattingEnabled = true;
-            this.listBoxLevels.Location = new System.Drawing.Point(618, 3);
+            this.listBoxLevels.Location = new System.Drawing.Point(617, 12);
             this.listBoxLevels.Name = "listBoxLevels";
             this.listBoxLevels.Size = new System.Drawing.Size(153, 82);
             this.listBoxLevels.TabIndex = 4;
@@ -116,6 +123,48 @@
             this.buttonAddFly.UseVisualStyleBackColor = true;
             this.buttonAddFly.Click += new System.EventHandler(this.buttonSetFly_Click);
             // 
+            // menuStripAngar
+            // 
+            this.menuStripAngar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip});
+            this.menuStripAngar.Location = new System.Drawing.Point(0, 0);
+            this.menuStripAngar.Name = "menuStripAngar";
+            this.menuStripAngar.Size = new System.Drawing.Size(800, 24);
+            this.menuStripAngar.TabIndex = 6;
+            this.menuStripAngar.Text = "Файл";
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(48, 20);
+            this.menuStrip.Text = "Файл";
+            // 
+            // openFileDialogAngar
+            // 
+            this.openFileDialogAngar.FileName = "openFileDialog";
+            this.openFileDialogAngar.Filter = "txt file | *.txt";
+            // 
+            // saveFileDialogAngar
+            // 
+            this.saveFileDialogAngar.Filter = "txt file | *.txt";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            // 
             // FormAngar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -125,13 +174,18 @@
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBoxAngar);
             this.Controls.Add(this.pictureBoxAngar);
+            this.Controls.Add(this.menuStripAngar);
+            this.MainMenuStrip = this.menuStripAngar;
             this.Name = "FormAngar";
             this.Text = "Ангар";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAngar)).EndInit();
             this.groupBoxAngar.ResumeLayout(false);
             this.groupBoxAngar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeFly)).EndInit();
+            this.menuStripAngar.ResumeLayout(false);
+            this.menuStripAngar.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -145,5 +199,11 @@
         private System.Windows.Forms.Label labelPlace;
         private System.Windows.Forms.ListBox listBoxLevels;
         private System.Windows.Forms.Button buttonAddFly;
+        private System.Windows.Forms.MenuStrip menuStripAngar;
+        private System.Windows.Forms.ToolStripMenuItem menuStrip;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
+        private System.Windows.Forms.OpenFileDialog openFileDialogAngar;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogAngar;
     }
 }

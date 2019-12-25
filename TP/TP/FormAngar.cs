@@ -93,7 +93,7 @@ namespace TP
             Draw();
         }
         /// <summary>
-        /// Обработка нажатия кнопки "Добавить автомобиль"
+        /// Обработка нажатия кнопки "Добавить самолет"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -117,6 +117,40 @@ namespace TP
                     MessageBox.Show("Самолет не удалось поставить");
                 }
             }
+        }
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (angar.SaveData(saveFileDialogAngar.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (angar.LoadData(openFileDialogAngar.FileName))
+                {                    
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
+                Draw();
+            }
+
         }
     }    
 }
