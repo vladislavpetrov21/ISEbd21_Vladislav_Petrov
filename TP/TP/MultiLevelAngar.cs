@@ -12,7 +12,7 @@ namespace TP
         /// <summary>
         /// Список с уровнями ангара
         /// </summary>
-        List<Angar<ISturmovic>> parkingStages;
+        List<Angar<ISturmovic>> angarStages;
         /// <summary>
         /// Сколько мест на каждом уровне
         /// </summary>
@@ -33,12 +33,12 @@ namespace TP
         /// <param name="pictureHeight"></param>
         public MultiLevelAngar(int countStages, int pictureWidth, int pictureHeight)
         {
-            parkingStages = new List<Angar<ISturmovic>>();
+            angarStages = new List<Angar<ISturmovic>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
             for (int i = 0; i < countStages; ++i)
             {
-                parkingStages.Add(new Angar<ISturmovic>(countPlaces, pictureWidth,
+                angarStages.Add(new Angar<ISturmovic>(countPlaces, pictureWidth,
                pictureHeight));
             }
         }
@@ -51,9 +51,9 @@ namespace TP
         {
             get
             {
-                if (ind > -1 && ind < parkingStages.Count)
+                if (ind > -1 && ind < angarStages.Count)
                 {
-                    return parkingStages[ind];
+                    return angarStages[ind];
                 }
                 return null;
             }
@@ -71,8 +71,8 @@ namespace TP
             }
             using (StreamWriter sw = new StreamWriter(filename))
             {
-                sw.WriteLine("CountLevels:" + parkingStages.Count);
-                foreach (var level in parkingStages)
+                sw.WriteLine("CountLevels:" + angarStages.Count);
+                foreach (var level in angarStages)
                 {
                     sw.WriteLine("Level");
                     for (int i = 0; i < countPlaces; i++)
@@ -110,11 +110,11 @@ namespace TP
                 if (isValid)
                 {
                     count = Convert.ToInt32(line.Split(':')[1]);
-                    if (parkingStages != null)
+                    if (angarStages != null)
                     {
-                        parkingStages.Clear();
+                        angarStages.Clear();
                     }
-                    parkingStages = new List<Angar<ISturmovic>>(count);
+                    angarStages = new List<Angar<ISturmovic>>(count);
                 }
                 else
                 {
@@ -125,7 +125,7 @@ namespace TP
                     if (line == "Level")
                     {
                         counter++;
-                        parkingStages.Add(new Angar<ISturmovic>(countPlaces, pictureWidth, pictureHeight));
+                        angarStages.Add(new Angar<ISturmovic>(countPlaces, pictureWidth, pictureHeight));
                         continue;
                     }
                     if (string.IsNullOrEmpty(line))
@@ -143,7 +143,7 @@ namespace TP
                         {
                             fly = new Sturmovic(splitLine[2]);
                         }
-                        parkingStages[counter][Convert.ToInt32(splitLine[0])] = fly;
+                        angarStages[counter][Convert.ToInt32(splitLine[0])] = fly;
                     }
                 }
                 return true;
