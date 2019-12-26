@@ -55,32 +55,29 @@ namespace TP
         private void buttonTakeAirplaneClick(object sender, EventArgs e)
         {
             if (listBoxLevels.SelectedIndex > -1)
-            {
-                if (listBoxLevels.SelectedIndex > -1)
+            {              
+                if (maskedTextBoxAngar.Text != "")
                 {
-                    if (maskedTextBoxAngar.Text != "")
+                    var fly = angar[listBoxLevels.SelectedIndex] -
+                    Convert.ToInt32(maskedTextBoxAngar.Text);
+                    if (fly != null)
                     {
-                        var fly = angar[listBoxLevels.SelectedIndex] -
-                       Convert.ToInt32(maskedTextBoxAngar.Text);
-                        if (fly != null)
-                        {
-                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
-                            Graphics gr = Graphics.FromImage(bmp);
-                            fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
-                            fly.DrawFly(gr);
-                            pictureBoxTakeFly.Image = bmp;
-                        }
-                        else
-                        {
-                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
-                            pictureBoxTakeFly.Image = bmp;
-                        }
-                        Draw();
+                        Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        Graphics gr = Graphics.FromImage(bmp);
+                        fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        fly.DrawFly(gr);
+                        pictureBoxTakeFly.Image = bmp;
                     }
-                }
+                    else
+                    {
+                        Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        pictureBoxTakeFly.Image = bmp;
+                    }
+                    Draw();
+                }                
             }
         }
         /// <summary>
