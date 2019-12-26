@@ -91,5 +91,12 @@ namespace TP
                 g.FillRectangle(spoiler, _startPosX + 80, _startPosY + 80, 40, 10);
             }
         }
+        /// Смена дополнительного цвета
+        /// </summary>
+        /// <param name="color"></param>
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;         
+        }
     }
 }

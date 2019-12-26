@@ -6,8 +6,9 @@ using System.Windows.Forms;
 
 namespace TP
 {
+    public delegate void flyDelegate(ISturmovic fly);
     static class Program
-    {
+    {       
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>

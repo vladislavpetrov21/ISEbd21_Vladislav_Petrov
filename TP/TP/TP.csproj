@@ -61,6 +61,12 @@
     <Compile Include="FormFly.Designer.cs">
       <DependentUpon>FormFly.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormFlyConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFlyConfig.Designer.cs">
+      <DependentUpon>FormFlyConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="ISturmovic.cs" />
     <Compile Include="MultiLevelAngar.cs" />
     <Compile Include="Program.cs" />
@@ -72,6 +78,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormFly.resx">
       <DependentUpon>FormFly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFlyConfig.resx">
+      <DependentUpon>FormFlyConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
