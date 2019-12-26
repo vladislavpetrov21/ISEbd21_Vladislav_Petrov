@@ -152,6 +152,11 @@ namespace TP
                     MessageBoxIcon.Error);
                     error.Error(ex.Message);
                 }
+                catch (AngarAlreadyHaveException ex)
+                {                  
+                MessageBox.Show(ex.Message, "Дублирование", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Неизвестная ошибка",
@@ -218,6 +223,17 @@ namespace TP
                 }
                 Draw();
             }
+        }
+        /// <summary>
+        /// Обработка нажатия кнопки "Сортировать"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            angar.Sort();
+            Draw();
+            logger.Info("Сортировка уровней");
         }
     }    
 }

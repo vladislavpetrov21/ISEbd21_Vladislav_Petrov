@@ -77,9 +77,8 @@ namespace TP
                     sw.WriteLine("Level");
                     for (int i = 0; i < countPlaces; i++)
                     {
-                        try
-                        {
-                            var fly = level[i];
+                        foreach (ISturmovic fly in level)
+                        {                           
                             if (fly != null)
                             {
                                 if (fly.GetType().Name == "Airplane")
@@ -91,8 +90,7 @@ namespace TP
                                     sw.WriteLine(i + ":Sturmovic:" + fly);
                                 }
                             }
-                        }
-                        finally { }
+                        }                        
                     }
                 }
             }
@@ -153,6 +151,13 @@ namespace TP
                 }
                 return true;
             }
+        }
+        /// <summary>
+        /// Сортировка уровней
+        /// </summary>
+        public void Sort()
+        {
+            angarStages.Sort();
         }
     }
 }

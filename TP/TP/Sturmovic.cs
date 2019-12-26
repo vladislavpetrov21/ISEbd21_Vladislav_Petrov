@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TP
 {
-    class Sturmovic: Airplane
+    class Sturmovic: Airplane, IComparable<Sturmovic>, IEquatable<Sturmovic>
     {
         /// <summary>
         /// Дополнительный цвет
@@ -116,6 +116,98 @@ namespace TP
         {
             return base.ToString() + ";" + DopColor.Name + ";" + Bomb + ";" +
            Star + ";" + Rocket;
+        }
+        /// <summary>
+        /// Метод интерфейса IComparable для класса Sturmovic
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public int CompareTo(Sturmovic other)
+        {
+            var res = (this is Airplane).CompareTo(other is Airplane);
+            if (res != 0)
+            {
+                return res;
+            }
+            if (DopColor != other.DopColor)
+            {
+                DopColor.Name.CompareTo(other.DopColor.Name);
+            }
+            if (Star != other.Star)
+            {
+                return Star.CompareTo(other.Star);
+            }
+            if (Bomb != other.Bomb)
+            {
+                return Bomb.CompareTo(other.Bomb);
+            }
+            if (Rocket != other.Rocket)
+            {
+                return Rocket.CompareTo(other.Rocket);
+            }
+            return 0;
+        }
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса Sturmovic
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Sturmovic other)
+        {
+            var res = (this as Airplane).Equals(other as Airplane);
+            if (!res)
+            {
+                return res;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            if (Star != other.Star)
+            {
+                return false;
+            }
+            if (Bomb != other.Bomb)
+            {
+                return false;
+            }
+            if (Rocket != other.Rocket)
+            {
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Sturmovic flyObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(flyObj);
+            }
+        }
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }
