@@ -62,7 +62,7 @@ namespace TP
         {
             if (a._places.Count == a._maxCount)
             {
-                return -1;
+                throw new AngarOverflowException();
             }
             for (int i = 0; i < a._maxCount; i++)
             {
@@ -92,7 +92,7 @@ namespace TP
                 a._places.Remove(index);
                 return fly;
             }
-            return null;
+            throw new AngarNotFoundException(index);
         }
         /// <summary>
         /// Индексатор
@@ -107,7 +107,7 @@ namespace TP
                 {
                     return _places[ind];
                 }
-                return null;
+                throw new AngarNotFoundException(ind);
             }
             set
             {
@@ -116,6 +116,10 @@ namespace TP
                     _places.Add(ind, value);
                     _places[ind].SetPosition(5 + ind / 5 * _placeSizeWidth + 5, ind % 5
                     * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+                }
+                else
+                {
+                    throw new AngarOccupiedPlaceException(ind);
                 }
             }
         }

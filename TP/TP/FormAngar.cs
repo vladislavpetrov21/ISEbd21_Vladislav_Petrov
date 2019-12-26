@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,10 +21,20 @@ namespace TP
         /// Форма для добавления
         /// </summary>
         FormFlyConfig form;
+        /// <summary>
+        /// Количество уровней-ангаров
+        /// </summary>
         private const int countLevel = 5;
+        /// <summary>
+        /// Логгеры
+        /// </summary>
+        private Logger logger;
+        private Logger error;
         public FormAngar()
         {
             InitializeComponent();
+            logger = LogManager.GetCurrentClassLogger();
+            error = LogManager.GetCurrentClassLogger();
             angar = new MultiLevelAngar(countLevel, pictureBoxAngar.Width,
             pictureBoxAngar.Height);
             //заполнение listBox
@@ -53,35 +64,51 @@ namespace TP
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void buttonTakeAirplaneClick(object sender, EventArgs e)
-        {
+        {       
             if (listBoxLevels.SelectedIndex > -1)
             {
-                if (listBoxLevels.SelectedIndex > -1)
+                if (maskedTextBoxAngar.Text != "")
                 {
-                    if (maskedTextBoxAngar.Text != "")
+                    try
                     {
                         var fly = angar[listBoxLevels.SelectedIndex] -
-                       Convert.ToInt32(maskedTextBoxAngar.Text);
+                        Convert.ToInt32(maskedTextBoxAngar.Text);
                         if (fly != null)
                         {
                             Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
+                            pictureBoxTakeFly.Height);
                             Graphics gr = Graphics.FromImage(bmp);
                             fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
+                            pictureBoxTakeFly.Height);
                             fly.DrawFly(gr);
                             pictureBoxTakeFly.Image = bmp;
                         }
                         else
                         {
                             Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
+                            pictureBoxTakeFly.Height);
                             pictureBoxTakeFly.Image = bmp;
                         }
+                        logger.Info("Изъят самолет " + fly.ToString() + " с места "+ maskedTextBoxAngar.Text);
                         Draw();
                     }
+                    catch (AngarNotFoundException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                        Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        pictureBoxTakeFly.Image = bmp;
+                        error.Error(ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        error.Error(ex.Message);
+                    }
                 }
-            }
+            }          
         }
         /// <summary>
         /// Метод обработки выбора элемента на listBoxLevels
@@ -107,14 +134,29 @@ namespace TP
         {
             if (fly != null && listBoxLevels.SelectedIndex > -1)
             {
-                int place = angar[listBoxLevels.SelectedIndex] + fly;
-                if (place > -1)
+                try
                 {
+                    int place = angar[listBoxLevels.SelectedIndex] + fly;
+                    if (place > -1)
+                    {
                     Draw();
-                }
-                else
-                {
+                    }
+                    else
+                    {
                     MessageBox.Show("Самолет не удалось поставить");
+                    }
+                }
+                catch (AngarOverflowException ex)
+                {
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                    error.Error(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error.Error(ex.Message);
                 }
             }
         }
@@ -122,15 +164,26 @@ namespace TP
         {
             if (saveFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (angar.SaveData(saveFileDialogAngar.FileName))
+                try
                 {
-                    MessageBox.Show("Сохранение прошло успешно", "Результат",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (angar.SaveData(saveFileDialogAngar.FileName))
+                    {
+                        MessageBox.Show("Сохранение прошло успешно", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        logger.Info("Сохранено в файл " + saveFileDialogAngar.FileName);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не сохранилось", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error.Error(ex.Message);
                 }
             }
         }
@@ -138,15 +191,30 @@ namespace TP
         {
             if (openFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (angar.LoadData(openFileDialogAngar.FileName))
-                {                    
-                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
-                }
-                else
+                try
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    if (angar.LoadData(openFileDialogAngar.FileName))
+                    {                    
+                        MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    }               
+                }
+                catch (AngarOccupiedPlaceException ex)
+                {
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
+                    error.Error(ex.Message);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при загрузке",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    error.Error(ex.Message);
                 }
                 Draw();
             }
