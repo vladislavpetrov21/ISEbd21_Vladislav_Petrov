@@ -11,7 +11,7 @@ namespace TP
         /// <summary>
         /// Список с уровнями ангара
         /// </summary>
-        List<Angar<ISturmovic>> angarStages;
+        List<Angar<ISturmovic>> parkingStages;
         /// <summary>
         /// Сколько мест на каждом уровне
         /// </summary>
@@ -24,10 +24,10 @@ namespace TP
         /// <param name="pictureHeight"></param>
         public MultiLevelAngar(int countStages, int pictureWidth, int pictureHeight)
         {
-            angarStages = new List<Angar<ISturmovic>>();
+            parkingStages = new List<Angar<ISturmovic>>();
             for (int i = 0; i < countStages; ++i)
             {
-                angarStages.Add(new Angar<ISturmovic>(countPlaces, pictureWidth,
+                parkingStages.Add(new Angar<ISturmovic>(countPlaces, pictureWidth,
                pictureHeight));
             }
         }
@@ -40,9 +40,9 @@ namespace TP
         {
             get
             {
-                if (ind > -1 && ind < angarStages.Count)
+                if (ind > -1 && ind < parkingStages.Count)
                 {
-                    return angarStages[ind];
+                    return parkingStages[ind];
                 }
                 return null;
             }
