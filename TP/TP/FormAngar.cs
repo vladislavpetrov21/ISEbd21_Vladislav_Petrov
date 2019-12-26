@@ -55,32 +55,29 @@ namespace TP
         private void buttonTakeAirplaneClick(object sender, EventArgs e)
         {
             if (listBoxLevels.SelectedIndex > -1)
-            {
-                if (listBoxLevels.SelectedIndex > -1)
+            {              
+                if (maskedTextBoxAngar.Text != "")
                 {
-                    if (maskedTextBoxAngar.Text != "")
+                    var fly = angar[listBoxLevels.SelectedIndex] -
+                    Convert.ToInt32(maskedTextBoxAngar.Text);
+                    if (fly != null)
                     {
-                        var fly = angar[listBoxLevels.SelectedIndex] -
-                       Convert.ToInt32(maskedTextBoxAngar.Text);
-                        if (fly != null)
-                        {
-                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
-                            Graphics gr = Graphics.FromImage(bmp);
-                            fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
-                            fly.DrawFly(gr);
-                            pictureBoxTakeFly.Image = bmp;
-                        }
-                        else
-                        {
-                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                           pictureBoxTakeFly.Height);
-                            pictureBoxTakeFly.Image = bmp;
-                        }
-                        Draw();
+                        Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        Graphics gr = Graphics.FromImage(bmp);
+                        fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        fly.DrawFly(gr);
+                        pictureBoxTakeFly.Image = bmp;
                     }
-                }
+                    else
+                    {
+                        Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        pictureBoxTakeFly.Image = bmp;
+                    }
+                    Draw();
+                }                
             }
         }
         /// <summary>
@@ -116,6 +113,39 @@ namespace TP
                 {
                     MessageBox.Show("Самолет не удалось поставить");
                 }
+            }
+        }
+        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (angar.SaveData(saveFileDialogAngar.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void загрузитьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                if (angar.LoadData(openFileDialogAngar.FileName))
+                {                    
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
+                Draw();
             }
         }
     }    

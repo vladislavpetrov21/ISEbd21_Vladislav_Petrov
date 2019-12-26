@@ -95,6 +95,31 @@ namespace TP
             return null;
         }
         /// <summary>
+        /// Индексатор
+        /// </summary>
+        /// <param name="ind"></param>
+        /// <returns></returns>
+        public T this[int ind]
+        {
+            get
+            {
+                if (_places.ContainsKey(ind))
+                {
+                    return _places[ind];
+                }
+                return null;
+            }
+            set
+            {
+                if (CheckFreePlace(ind))
+                {
+                    _places.Add(ind, value);
+                    _places[ind].SetPosition(5 + ind / 5 * _placeSizeWidth + 5, ind % 5
+                    * _placeSizeHeight + 15, PictureWidth, PictureHeight);
+                }
+            }
+        }
+        /// <summary>
         /// Метод проверки заполнености места в ангаре(ячейки массива)
         /// </summary>
         /// <param name="index">Номер места в ангаре(порядковый номер в массиве)</param>
@@ -123,7 +148,7 @@ namespace TP
         private void DrawMarking(Graphics g)
         {
             Pen pen = new Pen(Color.Black, 3);
-            //границы праковки
+            //границы ангара
             g.DrawRectangle(pen, 0, 0, (_maxCount / 5) * _placeSizeWidth, 480);
             for (int i = 0; i < _maxCount / 5; i++)
             {//отрисовываем, по 5 мест на линии
