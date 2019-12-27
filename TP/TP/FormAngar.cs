@@ -72,23 +72,14 @@ namespace TP
                     try
                     {
                         var fly = angar[listBoxLevels.SelectedIndex] -
-                        Convert.ToInt32(maskedTextBoxAngar.Text);
-                        if (fly != null)
-                        {
-                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                            pictureBoxTakeFly.Height);
-                            Graphics gr = Graphics.FromImage(bmp);
-                            fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
-                            pictureBoxTakeFly.Height);
-                            fly.DrawFly(gr);
-                            pictureBoxTakeFly.Image = bmp;
-                        }
-                        else
-                        {
-                            Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
-                            pictureBoxTakeFly.Height);
-                            pictureBoxTakeFly.Image = bmp;
-                        }
+                        Convert.ToInt32(maskedTextBoxAngar.Text);                        
+                        Bitmap bmp = new Bitmap(pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        Graphics gr = Graphics.FromImage(bmp);
+                        fly.SetPosition(5, 5, pictureBoxTakeFly.Width,
+                        pictureBoxTakeFly.Height);
+                        fly.DrawFly(gr);
+                        pictureBoxTakeFly.Image = bmp;                       
                         logger.Info("Изъят самолет " + fly.ToString() + " с места "+ maskedTextBoxAngar.Text);
                         Draw();
                     }
@@ -165,19 +156,12 @@ namespace TP
             if (saveFileDialogAngar.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 try
-                {
-                    if (angar.SaveData(saveFileDialogAngar.FileName))
-                    {
-                        MessageBox.Show("Сохранение прошло успешно", "Результат",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        logger.Info("Сохранено в файл " + saveFileDialogAngar.FileName);
-
-                    }
-                    else
-                    {
-                        MessageBox.Show("Не сохранилось", "Результат",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                {                   
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialogAngar.FileName);                   
+                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);                    
                 }
                 catch (Exception ex)
                 {
