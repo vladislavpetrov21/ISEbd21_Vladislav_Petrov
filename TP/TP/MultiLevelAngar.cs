@@ -77,18 +77,22 @@ namespace TP
                     sw.WriteLine("Level");
                     for (int i = 0; i < countPlaces; i++)
                     {
-                        var fly = level[i];
-                        if (fly != null)
+                        try
                         {
-                            if (fly.GetType().Name == "Airplane")
+                            var fly = level[i];
+                            if (fly != null)
                             {
-                                sw.WriteLine(i + ":Airplane:" + fly);
-                            }
-                            if (fly.GetType().Name == "Sturmovic")
-                            {
-                                sw.WriteLine(i + ":Sturmovic:" + fly);
+                                if (fly.GetType().Name == "Airplane")
+                                {
+                                    sw.WriteLine(i + ":Airplane:" + fly);
+                                }
+                                if (fly.GetType().Name == "Sturmovic")
+                                {
+                                    sw.WriteLine(i + ":Sturmovic:" + fly);
+                                }
                             }
                         }
+                        finally { }
                     }
                 }
             }
@@ -98,7 +102,7 @@ namespace TP
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             int counter = -1;
             ISturmovic fly = null;
@@ -118,7 +122,8 @@ namespace TP
                 }
                 else
                 {
-                    return false;
+                    //если нет такой записи, то это не те данные
+                    throw new Exception("Неверный формат файла");
                 }
                 while ((line = sr.ReadLine()) != null)
                 {
