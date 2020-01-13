@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace TP
 {
     /// <summary>
-    /// Класс-ошибка "Если на парковке уже есть самолет с такими же характеристиками"
+    /// Класс-ошибка "Если в ангаре уже есть самолет с такими же характеристиками"
     /// </summary>
     public class AngarAlreadyHaveException : Exception
     {
-        public AngarAlreadyHaveException() : base("На парковке уже есть такой самолет")
+        public AngarAlreadyHaveException() : base("В ангаре уже есть такой самолет")
         { }
     }
 }
