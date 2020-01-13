@@ -38,10 +38,11 @@
             this.buttonAddFly = new System.Windows.Forms.Button();
             this.menuStripAngar = new System.Windows.Forms.MenuStrip();
             this.menuStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFileDialogAngar = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialogAngar = new System.Windows.Forms.SaveFileDialog();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileDialogAngar = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialogAngar = new System.Windows.Forms.SaveFileDialog();
+            this.buttonSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxAngar)).BeginInit();
             this.groupBoxAngar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTakeFly)).BeginInit();
@@ -63,9 +64,9 @@
             this.groupBoxAngar.Controls.Add(this.buttonTakeAirplane);
             this.groupBoxAngar.Controls.Add(this.maskedTextBoxAngar);
             this.groupBoxAngar.Controls.Add(this.labelPlace);
-            this.groupBoxAngar.Location = new System.Drawing.Point(611, 172);
+            this.groupBoxAngar.Location = new System.Drawing.Point(611, 187);
             this.groupBoxAngar.Name = "groupBoxAngar";
-            this.groupBoxAngar.Size = new System.Drawing.Size(188, 277);
+            this.groupBoxAngar.Size = new System.Drawing.Size(188, 262);
             this.groupBoxAngar.TabIndex = 1;
             this.groupBoxAngar.TabStop = false;
             this.groupBoxAngar.Text = "забрать самолет";
@@ -115,9 +116,9 @@
             // 
             // buttonAddFly
             // 
-            this.buttonAddFly.Location = new System.Drawing.Point(622, 107);
+            this.buttonAddFly.Location = new System.Drawing.Point(621, 100);
             this.buttonAddFly.Name = "buttonAddFly";
-            this.buttonAddFly.Size = new System.Drawing.Size(148, 51);
+            this.buttonAddFly.Size = new System.Drawing.Size(111, 31);
             this.buttonAddFly.TabIndex = 5;
             this.buttonAddFly.Text = "Заказать";
             this.buttonAddFly.UseVisualStyleBackColor = true;
@@ -142,6 +143,20 @@
             this.menuStrip.Size = new System.Drawing.Size(48, 20);
             this.menuStrip.Text = "Файл";
             // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            // 
             // openFileDialogAngar
             // 
             this.openFileDialogAngar.FileName = "openFileDialog";
@@ -151,25 +166,22 @@
             // 
             this.saveFileDialogAngar.Filter = "txt file | *.txt";
             // 
-            // сохранитьToolStripMenuItem
+            // buttonSort
             // 
-            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.сохранитьToolStripMenuItem.Text = "Сохранить";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
-            // 
-            // загрузитьToolStripMenuItem
-            // 
-            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
-            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.загрузитьToolStripMenuItem.Text = "Загрузить";
-            this.загрузитьToolStripMenuItem.Click += new System.EventHandler(this.загрузитьToolStripMenuItem_Click);
+            this.buttonSort.Location = new System.Drawing.Point(625, 144);
+            this.buttonSort.Name = "buttonSort";
+            this.buttonSort.Size = new System.Drawing.Size(106, 28);
+            this.buttonSort.TabIndex = 7;
+            this.buttonSort.Text = "Сортировать";
+            this.buttonSort.UseVisualStyleBackColor = true;
+            this.buttonSort.Click += new System.EventHandler(this.buttonSort_Click);
             // 
             // FormAngar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonSort);
             this.Controls.Add(this.buttonAddFly);
             this.Controls.Add(this.listBoxLevels);
             this.Controls.Add(this.groupBoxAngar);
@@ -205,5 +217,6 @@
         private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialogAngar;
         private System.Windows.Forms.SaveFileDialog saveFileDialogAngar;
+        private System.Windows.Forms.Button buttonSort;
     }
 }
