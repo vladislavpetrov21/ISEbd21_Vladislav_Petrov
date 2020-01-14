@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace TP
 {
-    class Sturmovic: Airplane
+    class Sturmovic : Airplane
     {
         /// <summary>
         /// Дополнительный цвет
@@ -25,6 +25,8 @@ namespace TP
         /// Признак наличия ракет
         /// </summary>
         public bool Rocket { private set; get; }
+        public BombsCount Count { protected set; get; }
+        private int BombsType;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -36,13 +38,15 @@ namespace TP
         /// <param name="bomb">Признак наличия бомб</param>
         /// <param name="rocket">Признак наличия ракет</param>
         public Sturmovic(int maxSpeed, float weight, Color mainColor, Color dopColor,
-            bool star, bool bomb, bool rocket):
+            bool star, bool bomb, bool rocket,BombsCount bombscount):
             base (maxSpeed, weight, mainColor)
         {         
             DopColor = dopColor;
             Star = star;
             Bomb = bomb;
             Rocket = rocket;
+            Count = bombscount;
+            BombsType = new Random().Next(0, 3);
         }            
         /// <summary>
         /// Отрисовка самолета
@@ -81,6 +85,21 @@ namespace TP
                 g.FillEllipse(spoiler, _startPosX + 90, _startPosY + 90, 30, 10);
             }
             base.DrawFly(g);
+            IAirplane Bomba;
+
+            switch (BombsType)
+            {
+                case 0:
+                    Bomba = new RocketsClass(_startPosX, _startPosY);
+                    break;
+                case 1:
+                    Bomba = new ModifiedBombs(_startPosX, _startPosY);
+                    break;
+                default:
+                    Bomba = new ModifiedRockets(_startPosX, _startPosY);
+                    break;
+            }
+            Bomba.DrawBombs(Count, g, DopColor);
             // рисуем ракеты
             if (Rocket)
             {
